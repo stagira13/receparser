@@ -1,1 +1,2 @@
-from dpc_code import codes
+from .dpc_code import dpc_codes
+from .ika_code import ika_codes

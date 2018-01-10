@@ -71,6 +71,6 @@ CD = ['レコード識別情報','実施年月日','診療識別','順序番号'
 
 CO = ['レコード識別情報','診療識別','負担区分','コメントコード','文字データ']
 
-codes = {'RE':RE,'HO':HO,'GR':GR,'SJ':SJ,'KO':KO,'BU':BU,'SB':SB,'SY':SY,
+dpc_codes = {'RE':RE,'HO':HO,'GR':GR,'SJ':SJ,'KO':KO,'BU':BU,'SB':SB,'SY':SY,
          'KK':KK,'SK':SK,'GA':GA,'HH':HH,'GT':GT,'SI':SI,'IY':IY,
          'TO':TO,'CD':CD,'CO':CO}

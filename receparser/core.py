@@ -1,10 +1,14 @@
 from collections import namedtuple,defaultdict
 from operator import itemgetter
-from .codes.dpc_code import codes
+from .codes import dpc_codes,ika_codes 
 
 class MonthlyRece:
-    def __init__(self,file,codes):
-        self.codes = codes
+    def __init__(self,file,codes=None):
+        if codes == "dpc":
+            self.codes = dpc_codes
+        elif codes == "ika":
+            self.codes = ika_codes
+             
         with open(file,'r',encoding='shift_jis') as f:
             self.raw_text = f.read()
         d = "RE"

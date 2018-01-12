@@ -1,3 +1,5 @@
 ﻿__pycache__/
 *.py[cod]
 *$py.class
+.ipynb_checkpoints
+dpcsample_original.csv

@@ -77,10 +77,12 @@ class Rece:
         return self.rece_dict.items()
     
     def __getitem__(self,pos):
-        if len(self.rece_dict[pos]) == 1:
-            return self.rece_dict[pos][0]
-        else:
-            return self.rece_dict[pos]
+        return self.rece_dict[pos]
+        # テスト修正。常にリストを返すようにする
+        #if len(self.rece_dict[pos]) == 1:
+         #   return self.rece_dict[pos][0]
+        #else:
+         #   return self.rece_dict[pos]
     
     def __len__(self):
         return len(self.rece_dict)
@@ -89,7 +91,7 @@ class Rece:
         return str(self.rece_dict)
     
     def __eq__(self,other):
-        return self.race_dict == other.rece_dict
+        return self.rece_dict == other.rece_dict
     
     def __repr__(self):
         return 'Rece:{}'.format(self.rece_dict)

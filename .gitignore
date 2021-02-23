@@ -3,4 +3,5 @@
 *$py.class
 ipynb_checkpoints/
 dpcsample_original.csv
+*.DS_Store
 data/

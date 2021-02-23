@@ -11,14 +11,19 @@ class MonthlyRece:
              
         with open(file,'r',encoding='shift_jis') as f:
             self.raw_text = f.read()
+            self.IR_text = self.raw_text.split('\n')[0]
+            self.IR = Rece([self.IR_text],self.codes)['IR'][0]
+
         d = "RE"
         self.RE_data = [d + e for e in self.raw_text.split(d) if e][1:]
         # RE区切りのリストデータ。それぞれのリストは１レセプトのテキスト塊
-        self.monthly_dict = {}
+        self.monthly_dict = defaultdict(list)
         for text in self.RE_data:
             lst = text.split('\n')
             rece = Rece(lst,self.codes)
-            self.monthly_dict[rece.id] = rece
+            # ここが問題。同月に２つのIDが登場することがある！　入外混在してたり、DPCで出来高・DPCだったり。
+            # ひとまず回避として、IDをキーにreceのリストを返すよう仕様変更
+            self.monthly_dict[rece.id].append(rece)
     
     def __getitem__(self,pos):
         return self.monthly_dict[pos]
@@ -43,7 +48,7 @@ class MonthlyRece:
         return self.monthly_dict == other.monthly_dict
     
     def __repr__(self):
-        return 'Rece:{}'.format(self.monthly_dict)
+        return 'Rece:{}'.format(self.IR)
     
 class Rece:
     def __init__(self,lst,codes):

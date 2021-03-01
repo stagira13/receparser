@@ -45,15 +45,32 @@ def nyugai_helper(string):
 
 def exact_any_data(R,record_key):
     '''
-    test
-    属性情報を何も付加しないバージョン
-    付加するなら、dic={} dic.update(r['RE'][0])みたいなコードが必須。
-    ネストしたループになりそう
+    レコードに属性情報を付与し抽出します。
+    REレコードがないとエラーになります。
+    REが存在しないレセはありえないと思っていますが……
+
     '''
     data = []
     for key in R.keys():
         for r in R[key]:
-            data.extend(r[record_key])
+            if record_key in r.keys():
+                records = r[record_key]
+                for record in records:
+                    dic = {}
+                    dic.update(record)
+                    nyugai_string = r['RE'][0]['レセプト種別']
+                    nyugai = nyugai_helper(nyugai_string)
+                    
+                    dic['入外'] = nyugai
+                    dic['ID'] = key
+                    dic['医療機関名称'] = R.IR['医療機関名称']
+                    dic['請求年月'] = gengo_helper(R.IR['請求年月'])
+                    dic['診療年月'] = gengo_helper(r['RE'][0]['診療年月'])
+                    
+                    data.append(dic)
+
+            else:
+                pass
     return data
 
 def exact_HO_data_ika(R):
@@ -130,3 +147,5 @@ def exact_HO_data_dpc(R):
             data.append(dic)
 
     return data
+
+
